@@ -12,6 +12,7 @@ bold() {
   echo ". $(tput bold)" "$*" "$(tput sgr0)";
 }
 
+#Get the current enabled services/apis in the project and filters the specific one being passed
 has_service_enabled() {
   gcloud services list --project $1 \
     --filter="config.name:$2" \

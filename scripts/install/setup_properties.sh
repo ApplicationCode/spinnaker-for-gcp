@@ -12,29 +12,37 @@ bold() {
   echo ". $(tput bold)" "$*" "$(tput sgr0)";
 }
 
+#Not Required
 ~/cloudshell_open/spinnaker-for-gcp/scripts/manage/check_duplicate_dirs.sh || exit 1
 
+#Not Required
+#Get Project ID if not present
 if [ -z "$PROJECT_ID" ]; then
   PROJECT_ID=$(gcloud info --format='value(config.project)')
 fi
 
+#Not Required
 if [ -z "$PROJECT_ID" ]; then
   echo "PROJECT_ID must be specified."
   exit 1
 fi
 
+#Not Required
 PROPERTIES_FILE="$HOME/cloudshell_open/spinnaker-for-gcp/scripts/install/properties"
 if [ -f "$PROPERTIES_FILE" ]; then
   bold "The properties file already exists at $PROPERTIES_FILE. Please move it out of the way if you want to generate a new properties file."
   exit 1
 fi
 
+#We will be using GKE cluster created through TF so will have this created beforehand
+# To use an exisiting GKE cluster spcify the cluster name and zone.
 if [ "$GKE_CLUSTER" ]; then
   if [ -z "$ZONE" ]; then
     echo "If GKE_CLUSTER is specified, ZONE must also be specified."
     exit 1
   fi
 
+  # Gets the default SA of cluster nodes
   # Since cluster already exists, must resolve service account from the cluster.
   EXISTING_SA_EMAIL=$(gcloud beta container clusters describe --project $PROJECT_ID \
                         --zone $ZONE $GKE_CLUSTER --format="value(nodeConfig.serviceAccount)")
@@ -44,6 +52,7 @@ if [ "$GKE_CLUSTER" ]; then
     exit 1
   fi
 
+  # Genrally clusters should not have default compute sa as its a legacy thing
   if [ "$EXISTING_SA_EMAIL" == "default" ]; then
     SERVICE_ACCOUNT_NAME="Compute Engine default service account"
   else
@@ -56,8 +65,10 @@ SUBNET="default"
 ZONE=${ZONE:-us-east1-c}
 REGION=$(echo $ZONE | cut -d - -f 1,2)
 
+#Importing another script having 'has_service_enabled' function so as to call it in the next steps
 source ~/cloudshell_open/spinnaker-for-gcp/scripts/manage/service_utils.sh
 
+#Creating a function
 query_redis_instance_names() {
   if [ $(has_service_enabled $1 redis.googleapis.com) ]; then
     # TODO: Should really query redis instances across _all_ regions to ensure no deployment naming collision.
@@ -65,11 +76,12 @@ query_redis_instance_names() {
     EXISTING_REDIS_NAMES=$(gcloud redis instances list --region $REGION --project $1 \
                              --filter="name:spinnaker-" \
                              --format="value(name)")
-
+#Return value from function
     echo "$EXISTING_REDIS_NAMES"
   fi
 }
 
+#Calling the function and assigning the return value to a variable
 EXISTING_REDIS_NAMES=$(query_redis_instance_names $PROJECT_ID)
 
 # Also avoid name collisions with potential Shared VPC host project.
