@@ -13,6 +13,7 @@ bold() {
 }
 
 #Get the current enabled services/apis in the project and filters the specific one being passed
+#the function returns back '' if the api is not enabled
 has_service_enabled() {
   gcloud services list --project $1 \
     --filter="config.name:$2" \
@@ -45,6 +46,7 @@ check_for_required_binaries() {
   fi
 }
 
+#If network project is not equal to original project, thus meaning we are using a shared VPC
 check_for_shared_vpc() {
   if [ "$PROJECT_ID" != "$NETWORK_PROJECT" -a "$1" = true ]; then
     bold "Automated setup of Spinnaker for GCP with a Shared VPC host project is currently unsupported. To proceed, continue the setup in Cloud Shell."

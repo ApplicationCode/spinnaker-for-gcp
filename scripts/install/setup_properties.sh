@@ -69,7 +69,9 @@ REGION=$(echo $ZONE | cut -d - -f 1,2)
 source ~/cloudshell_open/spinnaker-for-gcp/scripts/manage/service_utils.sh
 
 #Creating a function
+#Only if the redis api is enabled try getting the redis instances, 
 query_redis_instance_names() {
+  # #the function returns back '' if the api is not enabled
   if [ $(has_service_enabled $1 redis.googleapis.com) ]; then
     # TODO: Should really query redis instances across _all_ regions to ensure no deployment naming collision.
     # TODO: Alternatively, could incorporate region in generated deployment name.
@@ -85,20 +87,27 @@ query_redis_instance_names() {
 EXISTING_REDIS_NAMES=$(query_redis_instance_names $PROJECT_ID)
 
 # Also avoid name collisions with potential Shared VPC host project.
+# Get Shared VPC host project if present
 if [ $(has_service_enabled $PROJECT_ID compute.googleapis.com) ]; then
   SHARED_VPC_HOST_PROJECT=$(gcloud compute shared-vpc get-host-project $PROJECT_ID --format="value(name)")
 fi
 
+# If shared VPC exists then get query-redis-instances within it
+# Call the function created above but with the project id of shared vpc project, to get redis instances
 if [ "$SHARED_VPC_HOST_PROJECT" ]; then
   SHARED_VPC_HOST_PROJECT_REDIS_NAMES=$(query_redis_instance_names $SHARED_VPC_HOST_PROJECT)
-
+#Append to the redis instances names 
   EXISTING_REDIS_NAMES="$EXISTING_REDIS_NAMES"$'\n'"$SHARED_VPC_HOST_PROJECT_REDIS_NAMES"
 fi
 
 EXISTING_DEPLOYMENT_COUNT=$(echo "$EXISTING_REDIS_NAMES" | sed '/^$/d' | wc -l)
 NEW_DEPLOYMENT_SUFFIX=$(($EXISTING_DEPLOYMENT_COUNT + 1))
+# Create deployment name 
 NEW_DEPLOYMENT_NAME="spinnaker-$NEW_DEPLOYMENT_SUFFIX"
 
+#check if any of the exisiting redis names have a name matching with new deployment name, if so then increment the 
+#new deployment name by 1, this is needed as the redis instance name will be the same as the deployment name
+#thats why we are going to all this length to keep names unique
 while [[ "$(echo "$EXISTING_REDIS_NAMES" | grep ^$NEW_DEPLOYMENT_NAME$ | wc -l)" != "0" ]]; do
   NEW_DEPLOYMENT_NAME="spinnaker-$((++NEW_DEPLOYMENT_SUFFIX))"
 done

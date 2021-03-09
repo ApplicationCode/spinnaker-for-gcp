@@ -6,14 +6,18 @@ err() {
 
 [ -z "$PARENT_DIR" ] && PARENT_DIR=$(dirname $(realpath $0) | rev | cut -d '/' -f 4- | rev)
 
+#Imports Service Utils scripts having some common functions
 source $PARENT_DIR/spinnaker-for-gcp/scripts/manage/service_utils.sh
 
+#Checks for the (git gcloud jq kubectl) binaries to be present on the system executing the scripts
 check_for_required_binaries
 
+#Checks if git is properly configured (probably for CSR)
 PARENT_DIR=$PARENT_DIR $PARENT_DIR/spinnaker-for-gcp/scripts/manage/check_git_config.sh || exit 1
 
 [ -z "$PROPERTIES_FILE" ] && PROPERTIES_FILE="$PARENT_DIR/spinnaker-for-gcp/scripts/install/properties"
 
+#Imports the property file that has the variables for spinnaker
 source "$PROPERTIES_FILE"
 
 check_for_shared_vpc $CI
