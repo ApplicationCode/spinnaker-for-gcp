@@ -18,12 +18,15 @@ source "$PROPERTIES_FILE"
 export IP_ADDR=$(gcloud compute addresses list --filter="name=$STATIC_IP_NAME" \
   --format="value(address)" --global --project $PROJECT_ID)
 
+#Different files for secured and unsecured spinnaker work
 if [ -z "$IP_ADDR" ]; then
   APP_MANIFEST_MIDDLE=spinnaker_application_manifest_middle_unsecured.yaml
 else
   APP_MANIFEST_MIDDLE=spinnaker_application_manifest_middle_secured.yaml
 fi
 
+#Creating a CRD for type 'Application'
+#And then creating the Spinnaker application of type 'Application'
 kubectl apply -f "https://raw.githubusercontent.com/GoogleCloudPlatform/marketplace-k8s-app-tools/master/crd/app-crd.yaml"
 cat $PARENT_DIR/spinnaker-for-gcp/templates/spinnaker_application_manifest_top.yaml \
   $PARENT_DIR/spinnaker-for-gcp/templates/$APP_MANIFEST_MIDDLE \

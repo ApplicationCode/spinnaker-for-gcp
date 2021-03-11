@@ -23,7 +23,7 @@ check_existing_cluster_location() {
     --filter="name=$GKE_CLUSTER" \
     --format="value(location)")
 
-  # If it's not in the specified zone, figure out where exactly it is.
+  # If it's not in the specified zone, figure out where exactly it is. If its a regional cluster then error out.
   if [ -z "$CLUSTER_EXISTS_IN_SPECIFIED_ZONE" ]; then
     EXISTING_CLUSTER_LOCATION=$(gcloud container clusters list --project $PROJECT_ID \
       --filter="name=$GKE_CLUSTER" \
@@ -40,6 +40,7 @@ check_existing_cluster_location() {
   fi
 }
 
+#Exisiting clusters need to have IP Aliasing enabled and should use an IAM backed SA instead of a default one
 check_existing_cluster_prereqs() {
   EXISTING_CLUSTER_DESCRIPTION=$(gcloud container clusters describe $GKE_CLUSTER --zone $ZONE --format json)
   IP_ALIASES_ENABLED=$(echo $EXISTING_CLUSTER_DESCRIPTION | jq .ipAllocationPolicy.useIpAliases)

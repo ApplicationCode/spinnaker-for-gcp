@@ -5,20 +5,28 @@
 if [ "$CI" == true ]; then
   HAL_PARENT_DIR=$PARENT_DIR
 else
+#Comes here for cloud shell install
   HAL_PARENT_DIR=$HOME
 fi
 
+#Get functions from service_utils
 source $PARENT_DIR/spinnaker-for-gcp/scripts/manage/service_utils.sh
 
+#get the properties file
 [ -z "$PROPERTIES_FILE" ] && PROPERTIES_FILE="$PARENT_DIR/spinnaker-for-gcp/scripts/install/properties"
 
+#Check for duplication and exit incase of errors
 $PARENT_DIR/spinnaker-for-gcp/scripts/manage/check_duplicate_dirs.sh || exit 1
+
+#Check for --global git config to be there so we can run git commands
 $PARENT_DIR/spinnaker-for-gcp/scripts/manage/check_git_config.sh || exit 1
 
 source "$PROPERTIES_FILE"
 
 # TODO(duftler): Add check to ensure that we are not overriding with older or empty config.
 
+#We would be running kubeclt commands so need the creds of the current context, we ran the command in setup.sh to connect to the 
+#GKE cluster we wanted to install spinnaker on, here we are making sure we still are on the same cluster
 CURRENT_CONTEXT=$(kubectl config current-context)
 
 if [ "$?" != "0" ]; then
@@ -52,6 +60,7 @@ source $PARENT_DIR/spinnaker-for-gcp/scripts/manage/cluster_utils.sh
 
 CLUSTER_EXISTS=$(check_for_existing_cluster)
 
+#Need an exisitng cluster, either should have been created in the setup.sh or be present already
 if [ -z "$CLUSTER_EXISTS" ]; then
   bold "Cluster $GKE_CLUSTER cannot be found. It may not exist."
   bold "To recreate your installation with this config, run:"
@@ -59,6 +68,7 @@ if [ -z "$CLUSTER_EXISTS" ]; then
   exit 1
 fi
 
+#This is the name of CSR repo we want to create as given in the properties file, probably we would be creating a repo now
 if [ -z "$CONFIG_CSR_REPO" ]; then
   bold "CONFIG_CSR_REPO was not set. Please run the $PARENT_DIR/spinnaker-for-gcp/scripts/manage/update_management_environment.sh" \
        "command to ensure you have all the necessary properties declared."
@@ -68,10 +78,13 @@ fi
 HALYARD_POD=spin-halyard-0
 
 TEMP_DIR=$(mktemp -d -t halyard.XXXXX)
+#pushes the temp dir on the stack, it sort of becomes the current dir
 pushd $TEMP_DIR
 
+#Sees in a repo exists by the same name
 EXISTING_CSR_REPO=$(gcloud source repos list --format="value(name)" --filter="name=projects/$PROJECT_ID/repos/$CONFIG_CSR_REPO" --project=$PROJECT_ID)
 
+#If not present then create one
 if [ -z "$EXISTING_CSR_REPO" ]; then
   bold "Creating Cloud Source Repository $CONFIG_CSR_REPO..."
 
@@ -149,6 +162,7 @@ kubectl -n halyard exec $HALYARD_POD -- bash -c "rm -rf ~/.hal/*"
 # Copy new config into place.
 bold "Copying $HAL_PARENT_DIR/.hal into halyard/$HALYARD_POD:/home/spinnaker/.hal..."
 
+#Copying over the config to the Halyard SS pod, since its only running one replica
 kubectl -n halyard cp $TEMP_DIR/$CONFIG_CSR_REPO/.hal spin-halyard-0:/home/spinnaker
 
 EXISTING_DEPLOYMENT_SECRET_NAME=$(kubectl get secret -n halyard \
@@ -164,6 +178,7 @@ bold "Creating Kubernetes secret spinnaker-deployment containing Spinnaker deplo
 kubectl create secret generic spinnaker-deployment -n halyard \
   --from-file deployment_config_files
 
+#Commiting and pushing the backup to CSR
 git add .
 git commit -m 'Automated backup.'
 git push
