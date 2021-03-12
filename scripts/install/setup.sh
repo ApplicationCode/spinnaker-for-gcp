@@ -416,7 +416,7 @@ EXISTING_CLOUD_FUNCTION=$(gcloud functions list --project $PROJECT_ID \
 #Create a JS cloud function for audit  Logs Spinnaker events to Stackdriver Logging so this is important to implement
 if [ -z "$EXISTING_CLOUD_FUNCTION" ]; then
   bold "Deploying audit log cloud function $CLOUD_FUNCTION_NAME..."
-
+  #Here in the config file we pass the cloud function auth, user and password
   cat $PARENT_DIR/spinnaker-for-gcp/scripts/install/spinnakerAuditLog/config_json.template | envsubst > $PARENT_DIR/spinnaker-for-gcp/scripts/install/spinnakerAuditLog/config.json
   cat $PARENT_DIR/spinnaker-for-gcp/scripts/install/spinnakerAuditLog/index_js.template | envsubst > $PARENT_DIR/spinnaker-for-gcp/scripts/install/spinnakerAuditLog/index.js
   gcloud functions deploy $CLOUD_FUNCTION_NAME --source $PARENT_DIR/spinnaker-for-gcp/scripts/install/spinnakerAuditLog \

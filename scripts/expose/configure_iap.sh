@@ -10,6 +10,7 @@ source ./install/properties
 
 ~/cloudshell_open/spinnaker-for-gcp/scripts/manage/check_project_mismatch.sh
 
+#This will be something like $DEPLOYMENT_NAME-oauth-client-secret which won't be there after a fresh install
 EXISTING_SECRET_NAME=$(kubectl get secret -n spinnaker \
   --field-selector metadata.name=="$SECRET_NAME" \
   -o json | jq .items[0].metadata.name)

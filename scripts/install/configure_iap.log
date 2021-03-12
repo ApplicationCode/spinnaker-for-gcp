@@ -1,0 +1,2600 @@
+~/cloudshell_open/spinnaker-for-gcp/scripts ~/cloudshell_open/spinnaker-for-gcp/scripts/install
+. [1m Creating Kubernetes secret spinnaker-oauth-client-secret... [m
+Enter your OAuth credentials Client ID: Enter your OAuth credentials Client secret: created key [32f503035023897703367fbc80fb58df62489a2f] of type [json] as [/home/mynkphyn/.spin/key.json] for [spinnaker-acc-1615466167@spin-practice.iam.gserviceaccount.com]
+secret/spinnaker-oauth-client-secret created
+backendconfig.cloud.google.com/config-default created
+service/spin-deck patched
+. [1m Patching spin-deck service to be NodePort instead of ClusterIP... [m
+service/spin-deck patched
+. [1m ingress.extensions/deck-ingress created [m
+. [1m Querying for backend service id... [m
+WARNING: The following filter keys were not present in any resource : description, iap.oauth2ClientId
+. [1m Waiting for backend service to be provisioned... [m
+{
+  "version": 1,
+  "etag": "BwW9QqL6cl4=",
+  "bindings": [
+    {
+      "role": "roles/iap.httpsResourceAccessor",
+      "members": [
+        "serviceAccount:spinnaker-acc-1615466167@spin-practice.iam.gserviceaccount.com",
+        "user:mynkphyn@gmail.com"
+      ]
+    }
+  ]
+}
+. [1m Configuring Spinnaker security settings... [m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mGet current deployment[0m
+[0m[2K
+[0m[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mGet current deployment[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mGet API security settings[0m
+[0m[2K
+[0m[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mGet API security settings[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mEdit API security settings[0m
+[0m[2K
+[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mEdit API security settings[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating halconfig with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mEdit API security settings[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating default with DeploymentConfigurationValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mEdit API security settings[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating default with DeploymentConfigurationValidator[0m[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mEdit API security settings[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[0mValidation in [0m[1mdefault[0m:[0m[0m
+[33m[1m- WARNING [0mVersion "1.19.3" was patched by "1.19.14". Please upgrade
+  when possible.[0m[0m
+[35m[1m? [0mhttps://www.spinnaker.io/community/releases/versions/[0m[0m
+[0m[0m
+Validation in [0m[1mhalconfig[0m:[0m[0m
+[33m[1m- WARNING [0mThere is a newer version of Halyard available (1.41.0),
+  please update when possible[0m[0m
+[35m[1m? [0mRun 'sudo apt-get update && sudo apt-get install
+  spinnaker-halyard -y' to upgrade[0m[0m
+[0m[0m
+Validation in [0m[1mdefault.security[0m:[0m[0m
+[33m[1m- WARNING [0mYour UI or API domain does not have override base URLs
+  set even though your Spinnaker deployment is a Distributed deployment on a
+  remote cloud provider. As a result, you will need to open SSH tunnels against
+  that deployment to access Spinnaker.[0m[0m
+[35m[1m? [0mWe recommend that you instead configure an authentication
+  mechanism (OAuth2, SAML2, or x509) to make it easier to access Spinnaker
+  securely, and then register the intended Domain and IP addresses that your
+  publicly facing services will be using.[0m[0m
+[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mGet current deployment[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mGet UI security settings[0m
+[0m[2K
+[0m[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mGet UI security settings[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mEdit UI security settings[0m
+[0m[2K
+[0m[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mEdit UI security settings[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[0mValidation in [0m[1mdefault[0m:[0m[0m
+[33m[1m- WARNING [0mVersion "1.19.3" was patched by "1.19.14". Please upgrade
+  when possible.[0m[0m
+[35m[1m? [0mhttps://www.spinnaker.io/community/releases/versions/[0m[0m
+[0m[0m
+Validation in [0m[1mhalconfig[0m:[0m[0m
+[33m[1m- WARNING [0mThere is a newer version of Halyard available (1.41.0),
+  please update when possible[0m[0m
+[35m[1m? [0mRun 'sudo apt-get update && sudo apt-get install
+  spinnaker-halyard -y' to upgrade[0m[0m
+[0m[0m
+[32m[1m+ [0mSuccessfully updated UI security settings.[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mGet current deployment[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mGet authentication settings[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mEdit iap authentication settings[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating default with EcsAccountValidator[0m[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mEdit iap authentication settings[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[0mValidation in [0m[1mdefault.security.authn[0m:[0m[0m
+[33m[1m- WARNING [0mAn authentication method is fully or partially
+  configured, but not enabled. It must be enabled to take effect.[0m[0m
+[0m[0m
+Validation in [0m[1mdefault[0m:[0m[0m
+[33m[1m- WARNING [0mVersion "1.19.3" was patched by "1.19.14". Please upgrade
+  when possible.[0m[0m
+[35m[1m? [0mhttps://www.spinnaker.io/community/releases/versions/[0m[0m
+[0m[0m
+Validation in [0m[1mhalconfig[0m:[0m[0m
+[33m[1m- WARNING [0mThere is a newer version of Halyard available (1.41.0),
+  please update when possible[0m[0m
+[35m[1m? [0mRun 'sudo apt-get update && sudo apt-get install
+  spinnaker-halyard -y' to upgrade[0m[0m
+[0m[0m
+[32m[1m+ [0mSuccessfully edited iap method.[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mGet current deployment[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mEdit iap authentication settings[0m
+[0m[2K
+[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mEdit iap authentication settings[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating default with DeploymentConfigurationValidator[0m[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mEdit iap authentication settings[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[0mValidation in [0m[1mdefault[0m:[0m[0m
+[33m[1m- WARNING [0mVersion "1.19.3" was patched by "1.19.14". Please upgrade
+  when possible.[0m[0m
+[35m[1m? [0mhttps://www.spinnaker.io/community/releases/versions/[0m[0m
+[0m[0m
+Validation in [0m[1mhalconfig[0m:[0m[0m
+[33m[1m- WARNING [0mThere is a newer version of Halyard available (1.41.0),
+  please update when possible[0m[0m
+[35m[1m? [0mRun 'sudo apt-get update && sudo apt-get install
+  spinnaker-halyard -y' to upgrade[0m[0m
+[0m[0m
+[32m[1m+ [0mSuccessfully enabled iap[0m[0m
+. [1m Updating Cloud Shell landing page for secured Spinnaker... [m
+. [1m Checking for existing cluster spinnaker... [m
+/tmp/halyard.0YmMh ~/cloudshell_open/spinnaker-for-gcp/scripts
+Cloning into '/tmp/halyard.0YmMh/spinnaker-config'...
+Project [spin-practice] repository [spinnaker-config] was cloned to [/tmp/halyard.0YmMh/spinnaker-config].
+. [1m Backing up /home/mynkphyn/.hal... [m
+. [1m Backing up Spinnaker deployment config files... [m
+. [1m Removing halyard/spin-halyard-0:/home/spinnaker/.hal... [m
+. [1m Copying /home/mynkphyn/.hal into halyard/spin-halyard-0:/home/spinnaker/.hal... [m
+. [1m Deleting Kubernetes secret spinnaker-deployment... [m
+secret "spinnaker-deployment" deleted
+. [1m Creating Kubernetes secret spinnaker-deployment containing Spinnaker deployment config files... [m
+secret/spinnaker-deployment created
+[master d9734ba] Automated backup.
+ 5 files changed, 93 insertions(+), 12 deletions(-)
+ create mode 100644 deployment_config_files/configure_iap_expanded.md
+ create mode 100644 deployment_config_files/key.json
+ create mode 100644 deployment_config_files/openapi_expanded.yml
+To https://source.developers.google.com/p/spin-practice/r/spinnaker-config
+   f7b2278..d9734ba  master -> master
+~/cloudshell_open/spinnaker-for-gcp/scripts
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mGet current deployment[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mPrep deployment[0m
+[0m[2K
+[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating default with DeploymentConfigurationValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating security with IAPValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mRunning validation[0m: Validating stats with HalconfigValidator[0m[0m
+[2K
+[0m[0m[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mPrep deployment[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+Validation in [0m[1mdefault[0m:[0m[0m
+[33m[1m- WARNING [0mVersion "1.19.3" was patched by "1.19.14". Please upgrade
+  when possible.[0m[0m
+[35m[1m? [0mhttps://www.spinnaker.io/community/releases/versions/[0m[0m
+Validation in [0m[1mdefault.stats[0m:[0m[0m
+[0m[0m
+[32m[1m- INFO [0mStats are currently ENABLED. Usage statistics are being
+  collected—Thank you! These stats inform improvements to the product, and that
+  helps the community. To disable, run `hal config stats disable`. To learn more
+  about what and how stats data is used, please see
+  https://www.spinnaker.io/community/stats.[0m[0m
+[0m[0m
+[32m[1m+ [0mPreparation complete... deploying Spinnaker[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mGet current deployment[0m
+[0m[2K
+[0m[0m
+[2A[0m[0m[2K
+[0m[32m[1m+ [0m[1mGet current deployment[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[0m
+[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Building service endpoints[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for clouddriver[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 0 custom profiles for deck[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 0 custom profiles for deck[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 0 custom profiles for deck[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for echo[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for echo[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for echo[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for front50[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for front50[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for gate[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for gate[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for gate[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for igor[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 1 custom profile for igor[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 0 custom profiles for kayenta[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 0 custom profiles for kayenta[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 2 profiles and discovered 0 custom profiles for kayenta[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 0 profiles and discovered 0 custom profiles for redis[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 0 profiles and discovered 0 custom profiles for redis[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 0 profiles and discovered 0 custom profiles for redis[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 0 profiles and discovered 0 custom profiles for redis[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 0 profiles and discovered 0 custom profiles for redis[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 0 profiles and discovered 0 custom profiles for redis[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 0 profiles and discovered 0 custom profiles for redis[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 0 profiles and discovered 0 custom profiles for redis[0m[0m
+[2A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Generated 0 profiles and discovered 0 custom profiles for redis[0m[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mDeploying spin-clouddriver with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mDeploying spin-front50 with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mDeploying spin-deck with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mDeploying spin-echo with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mDeploying spin-orca with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mDeploying spin-orca with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mDeploying spin-orca with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mDeploying spin-gate with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mDeploying spin-igor with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mDeploying spin-orca with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mDeploying spin-orca with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mDeploying spin-kayenta with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mDeploying spin-orca with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mDeploying spin-orca with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m_ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mDeploying spin-orca with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m_ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m- [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mDeploying spin-orca with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m- [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m^ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m^ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m  [0mDeploying spin-rosco with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[20A[0m[0m[2K
+[0m[34m[1m* [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mGenerating all Spinnaker profile files and endpoints[0m: Waiting on deployments to complete[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[34m[1m* [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m  [0mDeploying spin-rosco with kubectl[0m: Running kubectl apply on the resource definition...[0m[0m
+[20A[0m[0m[2K
+[0m[32m[1m+ [0m[1mApply deployment[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-clouddriver[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-front50[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-orca[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-deck[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-echo[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-gate[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-igor[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-kayenta[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[2K
+[0m[32m[1m+ [0m[1mDeploy spin-rosco[0m
+[0m[2K
+[0m  [0mSuccess[0m[0m
+[32m[1m+ [0mRun `hal deploy connect` to connect to Spinnaker.[0m[0m
+customresourcedefinition.apiextensions.k8s.io/applications.app.k8s.io configured
+application.app.k8s.io/spinnaker configured
+. [1m Labeling resources as components of application spinnaker... [m
+service/spin-clouddriver
+service/spin-deck
+service/spin-echo
+service/spin-front50
+service/spin-gate
+service/spin-igor
+service/spin-kayenta
+service/spin-orca
+service/spin-rosco
+deployment.extensions/spin-clouddriver
+deployment.extensions/spin-deck
+deployment.extensions/spin-echo
+deployment.extensions/spin-front50
+deployment.extensions/spin-gate
+deployment.extensions/spin-igor
+deployment.extensions/spin-kayenta
+deployment.extensions/spin-orca
+deployment.extensions/spin-rosco
+. [1m ACTION REQUIRED: [m
+. [1m   - Navigate to: https://console.developers.google.com/apis/credentials/oauthclient/52533701491-n3kif30e3npke93nspbrsgs576jbvsnf.apps.googleusercontent.com?project=spin-practice [m
+. [1m   - Add https://iap.googleapis.com/v1/oauth/clientIds/52533701491-n3kif30e3npke93nspbrsgs576jbvsnf.apps.googleusercontent.com:handleRedirect to your Web client ID as an Authorized redirect URI. [m
+~/cloudshell_open/spinnaker-for-gcp/scripts/install

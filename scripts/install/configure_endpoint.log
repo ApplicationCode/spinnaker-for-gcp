@@ -1,0 +1,55 @@
+~/cloudshell_open/spinnaker-for-gcp/scripts ~/cloudshell_open/spinnaker-for-gcp/scripts/install
+. [1m Creating static IP address spinnaker-external-ip... [m
+Created [https://www.googleapis.com/compute/v1/projects/spin-practice/global/addresses/spinnaker-external-ip].
+WARNING: The following filter keys were not present in any resource : serviceName
+. [1m Creating service spinnaker.endpoints.spin-practice.cloud.goog... [m
+{
+  "name": "operations/services.spinnaker.endpoints.spin-practice.cloud.goog-0",
+  "metadata": {
+    "@type": "type.googleapis.com/google.api.servicemanagement.v1.OperationMetadata",
+    "resourceNames": [
+      "services/spinnaker.endpoints.spin-practice.cloud.goog"
+    ],
+    "startTime": "2021-03-11T12:59:49.063Z"
+  },
+  "response": {
+    "@type": "type.googleapis.com/google.api.servicemanagement.v1.ManagedService",
+    "serviceName": "spinnaker.endpoints.spin-practice.cloud.goog",
+    "producerProjectId": "spin-practice"
+  }
+}
+WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+.WARNING: The following filter keys were not present in any resource : serviceName
+..
+. [1m Deploying service endpoint configuration for spinnaker.endpoints.spin-practice.cloud.goog... [m
+Waiting for async operation operations/serviceConfigs.spinnaker.endpoints.spin-practice.cloud.goog:d78a56ac-c295-4a14-959c-687ddd8c9e81 to complete...
+Operation finished successfully. The following command can describe the Operation details:
+ gcloud endpoints operations describe operations/serviceConfigs.spinnaker.endpoints.spin-practice.cloud.goog:d78a56ac-c295-4a14-959c-687ddd8c9e81
+
+Waiting for async operation operations/rollouts.spinnaker.endpoints.spin-practice.cloud.goog:a1f4dc19-e61d-420f-b6f3-38f66146eb42 to complete...
+Operation finished successfully. The following command can describe the Operation details:
+ gcloud endpoints operations describe operations/rollouts.spinnaker.endpoints.spin-practice.cloud.goog:a1f4dc19-e61d-420f-b6f3-38f66146eb42
+
+Service Configuration [2021-03-11r0] uploaded for service [spinnaker.endpoints.spin-practice.cloud.goog]
+
+To manage your API, go to: https://console.cloud.google.com/endpoints/api/spinnaker.endpoints.spin-practice.cloud.goog/overview?project=spin-practice
+WARNING: The following filter keys were not present in any resource : name
+. [1m Creating managed SSL certificate spinnaker-managed-cert for domain spinnaker.endpoints.spin-practice.cloud.goog... [m
+Created [https://www.googleapis.com/compute/beta/projects/spin-practice/global/sslCertificates/spinnaker-managed-cert].
+NAME                    TYPE     CREATION_TIMESTAMP             EXPIRE_TIME  MANAGED_STATUS
+spinnaker-managed-cert  MANAGED  2021-03-11T05:02:33.955-08:00               PROVISIONING
+    spinnaker.endpoints.spin-practice.cloud.goog: PROVISIONING
+~/cloudshell_open/spinnaker-for-gcp/scripts ~/cloudshell_open/spinnaker-for-gcp/scripts
+~/cloudshell_open/spinnaker-for-gcp/scripts
+~/cloudshell_open/spinnaker-for-gcp/scripts/install

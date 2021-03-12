@@ -106,6 +106,7 @@ else
   bold "Using existing managed SSL certificate $EXISTING_MANAGED_CERT..."
 fi
 
+#Launches the tutorial for cinfiguring IAP
 ./expose/launch_configure_iap.sh
 
 popd
