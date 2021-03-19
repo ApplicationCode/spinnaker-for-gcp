@@ -115,12 +115,15 @@ bindings:
   role: roles/cloudfunctions.invoker
 etag: BwW9QkTu2-g=
 version: 1
+pull_config.sh
 /tmp/halyard.NYwyE ~/cloudshell_open/spinnaker-for-gcp/scripts/install
 . [1m Removing /home/mynkphyn/.hal... [m
 . [1m Copying halyard/spin-halyard-0:/home/spinnaker/.hal into /home/mynkphyn/.hal... [m
 tar: removing leading '/' from member names
 ~/cloudshell_open/spinnaker-for-gcp/scripts/install
 . [1m Updating Cloud Shell landing page for unsecured Spinnaker... [m
+
+push_config.sh
 . [1m Checking for existing cluster spinnaker... [m
 /tmp/halyard.HKZee ~/cloudshell_open/spinnaker-for-gcp/scripts/install
 WARNING: The following filter keys were not present in any resource : name
@@ -854,6 +857,8 @@ The halyard daemon isn't running yet... starting it manually...
 Bash auto-completion configured.
 [1mTo use the auto-completion either restart your shell, or run[m
 [1m. /home/mynkphyn/.bashrc[m
+
+install_spin.sh
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 

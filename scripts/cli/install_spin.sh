@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
+#Get spin binary
 curl -LO https://storage.googleapis.com/spinnaker-artifacts/spin/$(curl -s https://storage.googleapis.com/spinnaker-artifacts/spin/latest)/linux/amd64/spin
 
+#Make it executable
 chmod +x spin
 mv spin ~
 
+#Put in bashrc
 grep -q '^alias spin=~/spin' ~/.bashrc || echo 'alias spin=~/spin' >> ~/.bashrc
 
+#make dir to hold spinnaker config
 mkdir -p ~/.spin
 
 # If there is no properties file, generate a new ~/.spin/config relying on port-forwarding.

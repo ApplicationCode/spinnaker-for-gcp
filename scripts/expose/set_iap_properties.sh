@@ -9,6 +9,7 @@ fi
 
 export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
 
+#https://cloud.google.com/load-balancing/docs/backend-service
 bold "Querying for backend service id..."
 
 export BACKEND_SERVICE_ID=$(gcloud compute backend-services list --project $PROJECT_ID \

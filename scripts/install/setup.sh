@@ -372,7 +372,9 @@ bold "Provisioning Spinnaker resources..."
 #SS: spin-halyard in Halyard NS mount PVC from above
 #Headless Service: for above SS
 #ConfigMap: to be mounted to above SS
-#Job: hal-deploy-apply, the same that was killed above 
+#Job: hal-deploy-apply, the same that was killed above
+############################### 
+#This job above runs the spinnaker installation too...
 envsubst < $PARENT_DIR/spinnaker-for-gcp/scripts/install/quick-install.yml | kubectl apply -f -
 
 #Create a wait function for the Job to complete
@@ -395,10 +397,10 @@ source $PARENT_DIR/spinnaker-for-gcp/scripts/manage/update_landing_page.sh
 # Calling the script(deploy_application_manifest.sh) instead of sourcing it so the script get executed
 # Script does the following:
 # Creates a CRD and then the Spinnaker Application of that CRD
-#
+# labels the k8s components (services, deployments etc) as part of the spinnaker application
 PARENT_DIR=$PARENT_DIR PROPERTIES_FILE=$PROPERTIES_FILE $PARENT_DIR/spinnaker-for-gcp/scripts/manage/deploy_application_manifest.sh
 
-# Delete any existing deployment config secret.
+# Delete any existing deployment config secret. This secret is not created in quick-install.yml
 # It will be recreated with up-to-date contents during push_config.sh.
 EXISTING_DEPLOYMENT_SECRET_NAME=$(kubectl get secret -n halyard \
   --field-selector metadata.name=="spinnaker-deployment" \
@@ -426,20 +428,24 @@ else
   bold "Using existing audit log cloud function $CLOUD_FUNCTION_NAME..."
 fi
 
-#This is probably the place where we go ahead and install spinnaker finally
+#Spinnaker is already installed, we now get to the part of backing up the current config
 #
 if [ "$USE_CLOUD_SHELL_HAL_CONFIG" = true ]; then
   # Not passing $CI since the guard makes it clear we are running from cloud shell.
-  # Probably this one is run through cloud shell tutorial therefore need to investigate in detail
   $PARENT_DIR/spinnaker-for-gcp/scripts/manage/push_and_apply.sh
 else
+  ###################################################
+  # Actually this is run thorugh cloud shell tutorial
   # We want the local hal config to match what was deployed.
   CI=$CI PARENT_DIR=$PARENT_DIR PROPERTIES_FILE=$PROPERTIES_FILE $PARENT_DIR/spinnaker-for-gcp/scripts/manage/pull_config.sh
   # We want a full backup stored in the bucket and the full deployment config stored in a secret.
   CI=$CI PARENT_DIR=$PARENT_DIR PROPERTIES_FILE=$PROPERTIES_FILE $PARENT_DIR/spinnaker-for-gcp/scripts/manage/push_config.sh
 fi
 
+#Since we updated the Config (by updating the files in the volume attached to Halyard SS) we wait till the services/ deployments pick up the config
+# and come back online
 #Function to wait for services to come up
+#Checking if ready by matching the ready replicas with required replicas
 deploy_ready() {
   printf "Waiting on $2 to come online"
   while [[ "$(kubectl get deploy $1 -n spinnaker -o \
@@ -462,11 +468,15 @@ deploy_ready spin-deck "UI server"
 if [ "$CI" != true ]; then
 #here since we are running in cloud shell
 bold "Calling CLI Scripts"
+  #Installs halyard on local machine so you can use `hal` commands
   $PARENT_DIR/spinnaker-for-gcp/scripts/cli/install_hal.sh --version $HALYARD_VERSION
+
+  #
   $PARENT_DIR/spinnaker-for-gcp/scripts/cli/install_spin.sh
 
   # We want a backup containing the newly-created ~/.spin/* files as well.
   # Not passing $CI since the guard already ensures it is not true.
+  # Calling it again moslty to backup spin config files
   $PARENT_DIR/spinnaker-for-gcp/scripts/manage/push_config.sh  
 fi
 

@@ -91,12 +91,16 @@ if [ -z "$EXISTING_CSR_REPO" ]; then
   gcloud source repos create $CONFIG_CSR_REPO --project=$PROJECT_ID
 fi
 
+#Cloned the CSR into the $TEMP_DIR created above
 gcloud source repos clone $CONFIG_CSR_REPO --project=$PROJECT_ID
 cd $CONFIG_CSR_REPO
 
+#this is where we copied halyard config in pull_config.sh
 bold "Backing up $HAL_PARENT_DIR/.hal..."
 
+#Removes any existing .hal (there shouldn't be any actually since $TEMP_DIR was just created above ) 
 rm -rf .hal
+#make .hal dir inside of $TEMP_DIR where you have cloned the CSR repo
 mkdir .hal
 
 # We want just these subdirs within $HAL_PARENT_DIR/.hal to be copied into place on the Halyard Daemon pod.
@@ -127,7 +131,9 @@ done
 
 bold "Backing up Spinnaker deployment config files..."
 
+#Removes any existing deployment_config_files (there shouldn't be any actually since $TEMP_DIR was just created above ) 
 rm -rf deployment_config_files
+#make deployment_config_files dir inside of $TEMP_DIR where you have cloned the CSR repo
 mkdir deployment_config_files
 
 copy_if_exists() {
@@ -143,14 +149,19 @@ copy_if_exists() {
   fi
 }
 
+#Copy properties file
 copy_if_exists "$PROPERTIES_FILE" deployment_config_files
+#copy Cloud function file
 copy_if_exists $PARENT_DIR/spinnaker-for-gcp/scripts/install/spinnakerAuditLog/config.json deployment_config_files
+#copy Cloud function file
 copy_if_exists $PARENT_DIR/spinnaker-for-gcp/scripts/install/spinnakerAuditLog/index.js deployment_config_files
 
+#Probably Push config is called again after IAP exposure so that the generated files can be backed up on CSR too
 # These files are generated when Spinnaker is exposed via IAP.
 # If the operator is managing more than one installation we don't want to inadvertently backup files from the wrong installation.
 copy_if_exists $PARENT_DIR/spinnaker-for-gcp/scripts/expose/configure_iap_expanded.md deployment_config_files "$PROJECT_ID\."
 copy_if_exists $PARENT_DIR/spinnaker-for-gcp/scripts/expose/openapi_expanded.yml deployment_config_files "$PROJECT_ID\."
+#Spin files created probably by install CLI scripts
 copy_if_exists ~/.spin/config deployment_config_files "$PROJECT_ID\."
 copy_if_exists ~/.spin/config deployment_config_files "localhost\:"
 copy_if_exists ~/.spin/key.json deployment_config_files "$PROJECT_ID\."
@@ -174,6 +185,7 @@ if [ $EXISTING_DEPLOYMENT_SECRET_NAME != 'null' ]; then
   kubectl delete secret spinnaker-deployment -n halyard
 fi
 
+#This secret stores the deployment config files, like properties and cloud functions code and IAP config (if enabled) not sure why we need it
 bold "Creating Kubernetes secret spinnaker-deployment containing Spinnaker deployment config files..."
 kubectl create secret generic spinnaker-deployment -n halyard \
   --from-file deployment_config_files

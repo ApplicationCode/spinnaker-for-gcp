@@ -7,4 +7,5 @@ HALYARD_POD=spin-halyard-0
 kubectl exec $HALYARD_POD -n halyard -- bash -c 'hal deploy apply'
 
 #this is called again it seems, it was called once in the setup.sh, probably now with changed config
+#Does CRD and Spinnaker Application creation then labels k8s resources
 ~/cloudshell_open/spinnaker-for-gcp/scripts/manage/deploy_application_manifest.sh
